@@ -1,0 +1,6 @@
+spring.application.name: assignment-api
+
+spring:
+  config:
+    import:
+      - application-db.yml

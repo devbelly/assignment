@@ -1,0 +1,14 @@
+services:
+  db:
+    image: library/mysql:latest
+    platform: linux/x86_64
+    container_name: assignment-container
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: getaim
+      MYSQL_USER: getaim-user
+      MYSQL_PASSWORD: password
+      TZ: Asia/Seoul
