@@ -1,6 +1,6 @@
 package co.getaim.storage.persistence.mysql.entity.user
 
-import co.getaim.domain.UserDomain
+import co.getaim.domain.user.UserDomain
 import co.getaim.storage.persistence.mysql.entity.BaseEntity
 import jakarta.persistence.*
 
@@ -32,5 +32,16 @@ class UserEntity(
         userId = userId,
         username = username,
         password = passwordValue
+    )
+
+    constructor(
+        userId: String,
+        username: String,
+        password: String,
+        id: Long = 0L
+    ) : this(
+        UserInformation(userId, username),
+        Password(password),
+        id
     )
 }
