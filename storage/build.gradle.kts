@@ -10,10 +10,8 @@ allOpen {
 
 dependencies {
     compileOnly(project(":domain"))
-
+    implementation(project(":common"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // kotlin-jdsl
     implementation("com.linecorp.kotlin-jdsl:jpql-dsl:3.3.1")
