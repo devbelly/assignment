@@ -1,3 +1,11 @@
+tasks.getByName("bootJar"){
+    enabled = false
+}
+
+tasks.getByName("jar") {
+    enabled = true
+}
+
 plugins {
     kotlin("plugin.jpa") version "1.9.25"
 }
@@ -9,10 +17,10 @@ allOpen {
 }
 
 dependencies {
-    compileOnly(project(":domain"))
     implementation(project(":common"))
+    api(project(":domain"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
+    implementation("org.springframework.boot:spring-boot-starter-web")
     // kotlin-jdsl
     implementation("com.linecorp.kotlin-jdsl:jpql-dsl:3.3.1")
     implementation("com.linecorp.kotlin-jdsl:jpql-render:3.3.1")
