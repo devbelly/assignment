@@ -30,3 +30,7 @@ data class LoginUserResponse(
 data class LogoutUserCommand(
     val refreshToken: String,
 )
+
+data class LogoutUserResponse(
+    val userId: String,
+)

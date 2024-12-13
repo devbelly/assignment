@@ -27,8 +27,8 @@ class UserController(
     }
 
     @PostMapping("/logout")
-    fun logout(@AuthToken refreshToken: String): ResponseEntity<Unit> {
-        userService.logout(LogoutUserCommand(refreshToken))
-        return ResponseEntity.noContent().build()
+    fun logout(@AuthToken refreshToken: String): ResponseEntity<LogoutUserResponse> {
+        val res = userService.logout(LogoutUserCommand(refreshToken))
+        return ResponseEntity.ok(res)
     }
 }

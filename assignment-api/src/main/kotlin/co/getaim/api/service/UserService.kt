@@ -49,7 +49,7 @@ class UserService(
         )
     }
 
-    fun logout(request: LogoutUserCommand): Unit {
+    fun logout(request: LogoutUserCommand): LogoutUserResponse {
         jwtTokenProvider.validateToken(request.refreshToken)
 
         if (blacklistService.doesExist(request.refreshToken)) {
@@ -57,5 +57,8 @@ class UserService(
         }
 
         blacklistService.save(request.refreshToken)
+        val userId = jwtTokenProvider.getSubject(request.refreshToken)
+
+        return LogoutUserResponse(userId)
     }
 }
