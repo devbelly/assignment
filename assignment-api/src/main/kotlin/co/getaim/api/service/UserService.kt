@@ -1,10 +1,9 @@
 package co.getaim.api.service
 
-import co.getaim.api.dto.LoginUserCommand
-import co.getaim.api.dto.LoginUserResponse
-import co.getaim.api.dto.SignUpUserCommand
-import co.getaim.api.dto.SignUpUserResponse
+import co.getaim.api.dto.*
 import co.getaim.common.utils.sha256Encrypt
+import co.getaim.exception.blacklist.BlacklistException
+import co.getaim.exception.blacklist.BlacklistExceptionType.ALREADY_LOGOUT
 import co.getaim.exception.user.UserException
 import co.getaim.exception.user.UserExceptionType.*
 import co.getaim.security.JwtTokenProvider
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service
 class UserService(
     private val userPersistService: UserPersistService,
     private val jwtTokenProvider: JwtTokenProvider,
+    private val blacklistService: BlacklistService
 ) {
 
     fun existUser(userId: String): Boolean {
@@ -45,5 +45,15 @@ class UserService(
             jwtTokenProvider.createAccessToken(user.userId),
             jwtTokenProvider.createRefreshToken(user.userId)
         )
+    }
+
+    fun logout(request: LogoutUserCommand): Unit {
+        jwtTokenProvider.validateToken(request.refreshToken)
+
+        if (blacklistService.doesExist(request.refreshToken)) {
+            throw BlacklistException(ALREADY_LOGOUT)
+        }
+
+        blacklistService.save(request.refreshToken)
     }
 }

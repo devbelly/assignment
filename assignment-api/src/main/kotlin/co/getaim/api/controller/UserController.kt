@@ -1,10 +1,8 @@
 package co.getaim.api.controller
 
-import co.getaim.api.dto.LoginUserCommand
-import co.getaim.api.dto.LoginUserResponse
-import co.getaim.api.dto.SignUpUserCommand
-import co.getaim.api.dto.SignUpUserResponse
+import co.getaim.api.dto.*
 import co.getaim.api.service.UserService
+import co.getaim.security.AuthToken
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -26,5 +24,11 @@ class UserController(
     fun login(@RequestBody request: LoginUserCommand): ResponseEntity<LoginUserResponse> {
         val res = userService.login(request)
         return ResponseEntity.ok(res)
+    }
+
+    @PostMapping("/logout")
+    fun logout(@AuthToken refreshToken: String): ResponseEntity<Unit> {
+        userService.logout(LogoutUserCommand(refreshToken))
+        return ResponseEntity.noContent().build()
     }
 }

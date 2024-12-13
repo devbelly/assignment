@@ -24,3 +24,7 @@ data class LoginUserResponse(
     val accessToken: String,
     val refreshToken: String,
 )
+
+data class LogoutUserCommand(
+    val refreshToken: String,
+)
