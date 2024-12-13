@@ -24,9 +24,9 @@ class LoginAop {
     @Around("loginPointcut()")
     fun logLogin(joinPoint: ProceedingJoinPoint): Any {
         val result = joinPoint.proceed()
-        val username = ((result as? ResponseEntity<*>)?.body as? LoginUserResponse)?.username
+        val userId = ((result as? ResponseEntity<*>)?.body as? LoginUserResponse)?.userId
 
-        log.info("사용자가 로그인 했습니다. : $username")
+        log.info("사용자가 로그인 했습니다. : $userId")
 
         return result
     }
