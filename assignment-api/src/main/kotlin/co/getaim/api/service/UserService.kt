@@ -42,6 +42,8 @@ class UserService(
         }
 
         return LoginUserResponse(
+            user.userId,
+            user.username,
             jwtTokenProvider.createAccessToken(user.userId),
             jwtTokenProvider.createRefreshToken(user.userId)
         )

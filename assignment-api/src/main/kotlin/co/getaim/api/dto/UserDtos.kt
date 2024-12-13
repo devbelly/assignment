@@ -21,6 +21,8 @@ data class SignUpUserResponse(
 }
 
 data class LoginUserResponse(
+    val userId: String,
+    val username: String,
     val accessToken: String,
     val refreshToken: String,
 )
