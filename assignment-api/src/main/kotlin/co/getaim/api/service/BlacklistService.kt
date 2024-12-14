@@ -1,8 +1,8 @@
 package co.getaim.api.service
 
 import co.getaim.storage.persistence.mysql.persistence.BlacklistPersistService
-import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
