@@ -8,8 +8,8 @@ import co.getaim.exception.user.UserException
 import co.getaim.exception.user.UserExceptionType.*
 import co.getaim.security.JwtTokenProvider
 import co.getaim.storage.persistence.mysql.persistence.UserPersistService
-import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
