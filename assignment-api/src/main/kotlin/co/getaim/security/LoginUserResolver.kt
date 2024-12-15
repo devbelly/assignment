@@ -6,6 +6,9 @@ import co.getaim.exception.blacklist.BlacklistException
 import co.getaim.exception.blacklist.BlacklistExceptionType.ALREADY_LOGOUT
 import co.getaim.exception.token.TokenException
 import co.getaim.exception.token.TokenExceptionType.*
+import co.getaim.exception.user.UserException
+import co.getaim.exception.user.UserExceptionType
+import co.getaim.exception.user.UserExceptionType.FORBIDDEN_USER
 import co.getaim.storage.persistence.mysql.persistence.UserPersistService
 import org.springframework.core.MethodParameter
 import org.springframework.http.HttpHeaders
@@ -42,7 +45,10 @@ class LoginUserResolver(
         }
 
         val userId = jwtTokenProvider.getSubject(token)
-        return userPersistService.findByUserId(userId)
+        val user = userPersistService.findByUserId(userId)
+
+//        validateIfAdministrator(parameter, user)
+        return user
     }
 
     private fun extractBearerToken(request: NativeWebRequest): String {
@@ -61,6 +67,14 @@ class LoginUserResolver(
             tokenFormat[0] to tokenFormat[1]
         } catch (e: IndexOutOfBoundsException) {
             throw TokenException(UNSUPPORTED_TOKEN)
+        }
+    }
+
+    private fun validateIfAdministrator(parameter: MethodParameter, user: UserDomain?) {
+        val annotation = parameter.getParameterAnnotation(LoginUser::class.java)
+        if (annotation?.administrator == true && !user!!.isAdmin) {
+
+            throw UserException(FORBIDDEN_USER)
         }
     }
 }
