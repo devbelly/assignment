@@ -15,6 +15,9 @@ class UserEntity(
     @Embedded
     var password: Password,
 
+    @Column(nullable = false)
+    val isAdmin: Boolean = false,
+
     id: Long = 0L
 ) : BaseEntity(id) {
 
@@ -31,17 +34,20 @@ class UserEntity(
         id = id,
         userId = userId,
         username = username,
-        password = passwordValue
+        password = passwordValue,
+        isAdmin = isAdmin
     )
 
     constructor(
         userId: String,
         username: String,
         password: String,
-        id: Long = 0L
+        id: Long = 0L,
+        isAdmin: Boolean = false
     ) : this(
         UserInformation(userId, username),
         Password(password),
+        isAdmin,
         id
     )
 }
