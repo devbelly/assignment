@@ -13,3 +13,8 @@ data class UpdateSecuritiesCommand(
     val securityCode: String,
     val price: BigDecimal
 )
+
+data class BuySecuritiesCommand(
+    val securityId: Long,
+    val quantity: Long
+)
