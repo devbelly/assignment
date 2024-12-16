@@ -2,6 +2,7 @@ package co.getaim.api.service
 
 import co.getaim.api.dto.CreateSecuritiesCommand
 import co.getaim.api.dto.UpdateSecuritiesCommand
+import co.getaim.domain.securities.SecuritiesDomain
 import co.getaim.storage.persistence.mysql.persistence.SecuritiesPersistService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,5 +27,9 @@ class SecuritiesService(
 
     fun delete(securitiesId: Long): Unit {
         securitiesPersistService.deleteById(securitiesId)
+    }
+
+    fun findAllById(ids: List<Long>): List<SecuritiesDomain> {
+        return securitiesPersistService.findAllById(ids)
     }
 }

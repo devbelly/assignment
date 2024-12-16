@@ -31,4 +31,8 @@ class SecuritiesPersistService(
     fun deleteById(securitiesId: Long) {
         repository.deleteById(securitiesId)
     }
+
+    fun findAllById(ids: List<Long>): List<SecuritiesDomain> {
+        return repository.findAllById(ids).map { it.toDomain() }
+    }
 }
