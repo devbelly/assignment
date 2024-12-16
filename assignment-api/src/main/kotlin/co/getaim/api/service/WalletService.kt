@@ -21,6 +21,8 @@ class WalletService(
     private val walletPersistService: WalletPersistService,
     private val publisher: ApplicationEventPublisher
 ) {
+    fun find(userId: Long) = walletPersistService.findByUserId(userId)
+
     fun createWallet(userId: Long) {
         walletPersistService.createWallet(userId)
     }
