@@ -23,4 +23,8 @@ class SecuritiesService(
             request.price
         )
     }
+
+    fun delete(securitiesId: Long): Unit {
+        securitiesPersistService.deleteById(securitiesId)
+    }
 }

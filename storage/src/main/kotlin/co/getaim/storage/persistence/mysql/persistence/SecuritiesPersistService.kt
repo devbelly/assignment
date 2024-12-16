@@ -28,4 +28,7 @@ class SecuritiesPersistService(
         return repository.update(securitiesId, securityName, securityCode, price)!!.toDomain()
     }
 
+    fun deleteById(securitiesId: Long) {
+        repository.deleteById(securitiesId)
+    }
 }

@@ -31,4 +31,13 @@ class SecuritiesController(
         securitiesService.update(securitiesId, request)
         return ResponseEntity.noContent().build()
     }
+
+    @DeleteMapping("/{securitiesId}")
+    fun delete(
+        @LoginUser(administrator = true) user: UserDomain,
+        @PathVariable securitiesId: Long
+    ): ResponseEntity<Unit> {
+        securitiesService.delete(securitiesId)
+        return ResponseEntity.noContent().build()
+    }
 }
