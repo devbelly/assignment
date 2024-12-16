@@ -4,8 +4,10 @@ import co.getaim.domain.portfolio.PortfolioDomain
 import co.getaim.storage.persistence.mysql.entity.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.Table
 
 @Entity
+@Table(name = "portfolio")
 class PortfolioEntity(
     @Column(nullable = false)
     val userId: Long,

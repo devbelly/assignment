@@ -4,8 +4,10 @@ import co.getaim.domain.blacklist.BlacklistDomain
 import co.getaim.storage.persistence.mysql.entity.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.Table
 
 @Entity
+@Table(name = "blacklist")
 class BlacklistEntity(
     @Column(nullable = false)
     val invalidRefreshToken: String,

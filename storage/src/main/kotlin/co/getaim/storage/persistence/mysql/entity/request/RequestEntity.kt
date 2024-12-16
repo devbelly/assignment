@@ -4,13 +4,11 @@ import co.getaim.domain.request.RequestDomain
 import co.getaim.domain.request.RequestStatus
 import co.getaim.domain.request.RiskType
 import co.getaim.storage.persistence.mysql.entity.BaseEntity
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
+import jakarta.persistence.*
 import jakarta.persistence.EnumType.*
-import jakarta.persistence.Enumerated
 
 @Entity
+@Table(name = "request")
 class RequestEntity(
     @Column(nullable = false)
     val userId: Long,
